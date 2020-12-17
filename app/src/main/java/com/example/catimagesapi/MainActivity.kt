@@ -4,8 +4,10 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.Toast
+import androidx.databinding.DataBindingUtil
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.example.catimagesapi.databinding.ActivityMainBinding
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -13,19 +15,31 @@ import retrofit2.Response
 
 class MainActivity : AppCompatActivity() {
 
-
-
+    lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+
         catApiMethod()
 
-        findViewById<Button>(R.id.next_image_btn).setOnClickListener {
+        binding.nextImageBtn.setOnClickListener {
             catApiMethod()
         }
 
+
+
+
+        //("Make everything solid: 1- runtime permission Internet 2- If not permission, use layout.gone")
+
+    }
+
+    fun layoutToHide(layoutNumber: Int){
+        when(layoutNumber){
+            0 -> ""
+        }
     }
 
     fun catApiMethod(){
@@ -38,6 +52,7 @@ class MainActivity : AppCompatActivity() {
 
             override fun onFailure(call: Call<List<CatObjectApi>>, t: Throwable) {
                 val response  = "Failure: " + t.message
+                //("Handle error")
             }
         })
     }

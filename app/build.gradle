@@ -32,6 +32,11 @@ android {
         jvmTarget = "1.8"
     }
 
+    // Enables data binding.
+    buildFeatures {
+        dataBinding true
+    }
+
 }
 
 dependencies {
@@ -56,5 +61,8 @@ dependencies {
 
     //glide
     implementation "com.github.bumptech.glide:glide:$version_glide"
+
+    //material design
+    implementation "com.google.android.material:material:$material_design_version"
 
 }

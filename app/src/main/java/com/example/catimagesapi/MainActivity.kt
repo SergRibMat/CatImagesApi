@@ -13,12 +13,6 @@ import androidx.databinding.DataBindingUtil
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.catimagesapi.databinding.ActivityMainBinding
-import com.karumi.dexter.Dexter
-import com.karumi.dexter.PermissionToken
-import com.karumi.dexter.listener.PermissionDeniedResponse
-import com.karumi.dexter.listener.PermissionGrantedResponse
-import com.karumi.dexter.listener.PermissionRequest
-import com.karumi.dexter.listener.single.PermissionListener
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -36,12 +30,7 @@ class MainActivity : AppCompatActivity() {
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
-        //withDexter()
-
         setUp()
-        //check if internet is available
-
-        //("Make everything solid: 1- runtime permission Internet 2- If not permission, use layout.gone")
 
         binding.checkInternetBtn.setOnClickListener {
             showToast(permissionBoolean().toString())
@@ -53,7 +42,6 @@ class MainActivity : AppCompatActivity() {
             binding.nextImageBtn.setOnClickListener {
                 catApiMethod()
             }
-
     }
 
 
@@ -62,6 +50,7 @@ class MainActivity : AppCompatActivity() {
         if(permissionGiven) {
             showInternetAvailableLayout(true)
             showNoInternetLayout(false)
+
             internetResponse()
         }else{
             showInternetAvailableLayout(false)
@@ -78,8 +67,7 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onFailure(call: Call<List<CatObjectApi>>, t: Throwable) {
-                val response = "Failure: " + t.message
-                //("Handle error")
+                printImageWithGlide(R.drawable.error_cat)
             }
         })
     }
@@ -95,9 +83,7 @@ class MainActivity : AppCompatActivity() {
         binding.noInternetLayout.visibility = makeLayoutItVisible(bool)
     }
 
-
-
-    private fun printImageWithGlide(data: String?) {
+    private fun printImageWithGlide(data: Any?) {
         Glide.with(this)
             .load(data)
             .apply(

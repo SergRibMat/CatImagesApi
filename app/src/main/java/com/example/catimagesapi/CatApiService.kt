@@ -22,8 +22,8 @@ private val retrofit = Retrofit.Builder()
 
 interface CatApiService {
     @GET("search")
-    fun getProperties():
-            Call<List<CatObjectApi>>
+    suspend fun getProperties():
+            List<CatObjectApi>
 }
 
 //object CatApi {

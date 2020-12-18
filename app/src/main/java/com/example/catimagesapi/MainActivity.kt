@@ -13,6 +13,10 @@ import androidx.databinding.DataBindingUtil
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.catimagesapi.databinding.ActivityMainBinding
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -59,7 +63,20 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun internetResponse(){
-        retrofitService.getProperties().enqueue(object : Callback<List<CatObjectApi>> {
+        var viewModelJob = Job()
+        val uiScope = CoroutineScope(Dispatchers.Main +  viewModelJob)
+
+        uiScope.launch {
+            val imageUrlString = retrofitService.getProperties().get(0).url
+            printImageWithGlide(imageUrlString)
+            viewModelJob.cancel()
+        }
+
+        //suspend fun getProperties() = retrofitService.getProperties().get(0).url
+
+
+
+        /*retrofitService.getProperties().enqueue(object : Callback<List<CatObjectApi>> {
             override fun onResponse(call: Call<List<CatObjectApi>>, response: Response<List<CatObjectApi>>) {
                 val imageUrlString = response.body()?.get(0)?.url
                 printImageWithGlide(imageUrlString)
@@ -69,7 +86,7 @@ class MainActivity : AppCompatActivity() {
             override fun onFailure(call: Call<List<CatObjectApi>>, t: Throwable) {
                 printImageWithGlide(R.drawable.error_cat)
             }
-        })
+        })*/
     }
 
 

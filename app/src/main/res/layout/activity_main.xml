@@ -34,6 +34,18 @@
                 app:elevation="6dp"
         />
 
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/navigate_next_72"
+                app:backgroundTint="@color/colorAccent"
+                android:layout_gravity="bottom|start"
+                android:layout_margin="16dp"
+                android:id="@+id/check_internet_btn"
+                app:elevation="6dp"
+
+        />
+
         <FrameLayout
                 android:visibility="gone"
                 android:id="@+id/no_internet_layout"

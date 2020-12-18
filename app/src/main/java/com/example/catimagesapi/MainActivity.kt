@@ -1,19 +1,32 @@
 package com.example.catimagesapi
 
-import androidx.appcompat.app.AppCompatActivity
+import android.Manifest
+import android.content.Context
+import android.content.DialogInterface
+import android.net.ConnectivityManager
 import android.os.Bundle
-import android.widget.Button
+import android.view.View
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.catimagesapi.databinding.ActivityMainBinding
+import com.karumi.dexter.Dexter
+import com.karumi.dexter.PermissionToken
+import com.karumi.dexter.listener.PermissionDeniedResponse
+import com.karumi.dexter.listener.PermissionGrantedResponse
+import com.karumi.dexter.listener.PermissionRequest
+import com.karumi.dexter.listener.single.PermissionListener
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 
 class MainActivity : AppCompatActivity() {
+
+    var permissionGiven: Boolean = false
 
     lateinit var binding: ActivityMainBinding
 
@@ -23,27 +36,41 @@ class MainActivity : AppCompatActivity() {
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
-        catApiMethod()
+        //withDexter()
 
-        binding.nextImageBtn.setOnClickListener {
-            catApiMethod()
-        }
-
-
-
+        setUp()
+        //check if internet is available
 
         //("Make everything solid: 1- runtime permission Internet 2- If not permission, use layout.gone")
 
+        binding.checkInternetBtn.setOnClickListener {
+            showToast(permissionBoolean().toString())
+        }
+    }
+    fun setUp(){
+            catApiMethod()
+
+            binding.nextImageBtn.setOnClickListener {
+                catApiMethod()
+            }
+
     }
 
-    fun layoutToHide(layoutNumber: Int){
-        when(layoutNumber){
-            0 -> ""
+
+    fun catApiMethod(){
+        permissionGiven = permissionBoolean()
+        if(permissionGiven) {
+            showInternetAvailableLayout(true)
+            showNoInternetLayout(false)
+            internetResponse()
+        }else{
+            showInternetAvailableLayout(false)
+            showNoInternetLayout(true)
         }
     }
 
-    fun catApiMethod(){
-        retrofitService.getProperties().enqueue( object: Callback<List<CatObjectApi>> {
+    fun internetResponse(){
+        retrofitService.getProperties().enqueue(object : Callback<List<CatObjectApi>> {
             override fun onResponse(call: Call<List<CatObjectApi>>, response: Response<List<CatObjectApi>>) {
                 val imageUrlString = response.body()?.get(0)?.url
                 printImageWithGlide(imageUrlString)
@@ -51,10 +78,21 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onFailure(call: Call<List<CatObjectApi>>, t: Throwable) {
-                val response  = "Failure: " + t.message
+                val response = "Failure: " + t.message
                 //("Handle error")
             }
         })
+    }
+
+
+    fun makeLayoutItVisible(bool: Boolean): Int = if (bool) View.VISIBLE else View.GONE
+
+    fun showInternetAvailableLayout(bool: Boolean){
+        binding.internetAvailableLayout.visibility = makeLayoutItVisible(bool)
+    }
+
+    fun showNoInternetLayout(bool: Boolean){
+        binding.noInternetLayout.visibility = makeLayoutItVisible(bool)
     }
 
 
@@ -73,4 +111,22 @@ class MainActivity : AppCompatActivity() {
     fun showToast(text: String){
         Toast.makeText(this, text, Toast.LENGTH_SHORT).show()
     }
+
+
+    private fun permissionBoolean(): Boolean{
+        //this variable here holds, with am int, if the permission is given or not
+        var permissionNumber: Int = checkSelfPermission(Manifest.permission.INTERNET)
+        return permissionNumber == 0 && isNetworkAvailable()
+    }
+
+    override fun checkSelfPermission(permission: String): Int {
+        return super.checkSelfPermission(permission)
+    }
+
+    private fun isNetworkAvailable(): Boolean {
+        val connectivityManager = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val activeNetworkInfo = connectivityManager.activeNetworkInfo
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected
+    }
+
 }

@@ -7,7 +7,6 @@ buildscript {
         version_moshi = "1.10.0"
         material_design_version = "1.2.1"
         version_kotlin_coroutines = "1.4.1"
-        version_retrofit_coroutines_adapter = "1.0.0"
     }
     repositories {
         google()

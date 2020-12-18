@@ -67,26 +67,11 @@ class MainActivity : AppCompatActivity() {
         val uiScope = CoroutineScope(Dispatchers.Main +  viewModelJob)
 
         uiScope.launch {
-            val imageUrlString = retrofitService.getProperties().get(0).url
+            val imageUrlString = retrofitService.getProperties()[0].url
             printImageWithGlide(imageUrlString)
             viewModelJob.cancel()
         }
 
-        //suspend fun getProperties() = retrofitService.getProperties().get(0).url
-
-
-
-        /*retrofitService.getProperties().enqueue(object : Callback<List<CatObjectApi>> {
-            override fun onResponse(call: Call<List<CatObjectApi>>, response: Response<List<CatObjectApi>>) {
-                val imageUrlString = response.body()?.get(0)?.url
-                printImageWithGlide(imageUrlString)
-
-            }
-
-            override fun onFailure(call: Call<List<CatObjectApi>>, t: Throwable) {
-                printImageWithGlide(R.drawable.error_cat)
-            }
-        })*/
     }
 
 

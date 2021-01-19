@@ -14,7 +14,7 @@
  *    limitations under the License.
  */
 
-package com.example.catimagesapi
+package sergio.ribera.random_cats
 
 import android.Manifest
 import android.content.Context
@@ -26,7 +26,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
-import com.example.catimagesapi.databinding.ActivityMainBinding
+import sergio.ribera.random_cats.databinding.ActivityMainBinding
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job

@@ -14,12 +14,19 @@
  *    limitations under the License.
  */
 
-package com.example.catimagesapi
+package sergio.ribera.random_cats
 
-data class CatObjectApi(
-    //val breeds: List<Any>,
-    val id: String,
-    val url: String,
-    val width: Int,
-    val height: Int
-)
+import android.view.View
+import org.junit.Test
+
+import org.junit.Assert.*
+
+class MainActivityTest {
+
+    @Test
+    fun makeLayoutItVisible() {
+        val visibility = if (true) View.GONE else View.VISIBLE
+
+        assertEquals(View.GONE, visibility)
+    }
+}

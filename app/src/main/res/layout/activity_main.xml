@@ -26,29 +26,27 @@
             android:layout_height="match_parent"
             tools:context=".MainActivity"
     >
-        <FrameLayout
+        <LinearLayout
                 android:id="@+id/internet_available_layout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:visibility="visible"
-        >
+                android:orientation="vertical"
+                android:weightSum="10">
             <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     tools:srcCompat="@tools:sample/avatars"
+                    android:layout_weight="9"
                     android:id="@+id/show_picture_imageview"/>
-        </FrameLayout>
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/navigate_next_72"
-                app:backgroundTint="@color/colorAccent"
-                android:layout_gravity="bottom|end"
-                android:layout_margin="16dp"
-                android:id="@+id/next_image_btn"
-                app:elevation="6dp"
-        />
+            <Button
+                    android:text="NEXT"
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/next_image_btn"
+                    android:textSize="24sp" />
+        </LinearLayout>
 
         <FrameLayout
                 android:visibility="gone"

@@ -24,7 +24,7 @@ android {
 
     defaultConfig {
         applicationId "sergio.ribera.random_cats"
-        minSdkVersion 24
+        minSdkVersion 23
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"

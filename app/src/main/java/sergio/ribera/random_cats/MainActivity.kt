@@ -48,6 +48,8 @@ class MainActivity : AppCompatActivity() {
         setUp()
 
     }
+
+
     fun setUp(){
             catApiMethod()
 
@@ -75,6 +77,7 @@ class MainActivity : AppCompatActivity() {
         val uiScope = CoroutineScope(Dispatchers.Main +  viewModelJob)
 
         uiScope.launch {
+            //aqui esta el objeto que se coge de internet
             val imageUrlString = retrofitService.getProperties()[0].url
             printImageWithGlide(imageUrlString)
             viewModelJob.cancel()

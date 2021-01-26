@@ -94,17 +94,6 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-
-    fun makeLayoutItVisible(bool: Boolean): Int = if (bool) View.VISIBLE else View.GONE
-
-    fun showInternetAvailableLayout(bool: Boolean){
-        binding.internetAvailableLayout.visibility = makeLayoutItVisible(bool)
-    }
-
-    fun showNoInternetLayout(bool: Boolean){
-        binding.noInternetLayout.visibility = makeLayoutItVisible(bool)
-    }
-
     private fun printImageWithGlide(data: Any?) {
         Glide.with(this)
             .load(data)
@@ -148,37 +137,9 @@ class MainActivity : AppCompatActivity() {
         return activeNetworkInfo != null && activeNetworkInfo.isConnected
     }
 
-    //hilo de ejecucion continuo
-    //si hay internet y noInternetLayout == visible, volver a bootn y imagen
-
-
-    fun lookForInternetInTime(seconds: Int){//parameter time in seconds
-        var viewModelJob = Job()
-        val uiScope = CoroutineScope(Dispatchers.IO +  viewModelJob)
-        val timeInMillis = fromSecondsToMillis(seconds)
-        uiScope.launch {
-            while (true){
-                checkShowCatAndButton()
-                Thread.sleep(timeInMillis)
-                Log.i("lookForInternetInTime", "Ha comprobado si hay internet o no")
-            }
-        }
-    }
-
-    suspend fun checkShowCatAndButton(){
-        if (isNetworkAvailable() && binding.noInternetLayout.visibility == View.VISIBLE){
-            withContext(Main){
-                showNoInternetLayout(false)
-                showInternetAvailableLayout(true)
-            }
-        }
-    }
-
     fun setButtonEnabled(bool: Boolean){
         binding.nextImageBtn.isEnabled = bool
     }
 
-
-    fun fromSecondsToMillis(seconds: Int): Long = (seconds * 1000).toLong()
 
 }

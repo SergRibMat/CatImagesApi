@@ -48,19 +48,6 @@
                     android:textSize="24sp" />
         </LinearLayout>
 
-        <FrameLayout
-                android:visibility="gone"
-                android:id="@+id/no_internet_layout"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-            <ImageView
-                    android:src="@drawable/ic_baseline_signal_wifi_off_24"
-                    android:layout_gravity="center"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
-
-        </FrameLayout>
-
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 </layout>

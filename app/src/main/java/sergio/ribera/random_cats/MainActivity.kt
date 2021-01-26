@@ -49,8 +49,6 @@ class MainActivity : AppCompatActivity() {
 
         setUp()
 
-        //lookForInternetInTime(4)
-
     }
 
 
@@ -66,15 +64,10 @@ class MainActivity : AppCompatActivity() {
     fun catApiMethod(){
         permissionGiven = permissionBoolean()
         if(permissionGiven) {
-            //showInternetAvailableLayout(true)
-            //showNoInternetLayout(false)
-
+            setButtonEnabled(false)
             internetResponse()
         }else{
             printNoInternetWithGlide()
-            //printImageWithGlide(R.drawable.ic_baseline_signal_wifi_off_24)
-            //showInternetAvailableLayout(false)
-            //showNoInternetLayout(true)
         }
     }
 
@@ -85,20 +78,19 @@ class MainActivity : AppCompatActivity() {
 
         uiScope.launch {
             try{
-                //aqui esta el objeto que se coge de internet
                 val imageUrlString = retrofitService.getProperties()[0].url
-                //aqui
                 withContext(Main){
                     printImageWithGlide(imageUrlString)
+                    setButtonEnabled(true)
                 }
                 uiScope.cancel()
             }catch (e: SocketTimeoutException){
                 withContext(Main){
                     showToast("The server is not responding")
+                    setButtonEnabled(true)
                 }
                 uiScope.cancel()
             }
-
         }
     }
 
@@ -182,7 +174,9 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-
+    fun setButtonEnabled(bool: Boolean){
+        binding.nextImageBtn.isEnabled = bool
+    }
 
 
     fun fromSecondsToMillis(seconds: Int): Long = (seconds * 1000).toLong()

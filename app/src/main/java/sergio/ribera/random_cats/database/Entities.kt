@@ -32,3 +32,14 @@ data class DatabaseCatObject(
     @ColumnInfo(name = "url")
     val url: String
 )
+
+@Entity(tableName = "utility_table_cache")
+data class DatabaseUtilityClass(
+
+    @PrimaryKey
+    @ColumnInfo(name = "id")
+    val imageId: Long,
+
+    @ColumnInfo(name = "is_first_time")
+    val firstTime: Boolean
+)

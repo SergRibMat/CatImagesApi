@@ -60,3 +60,14 @@ interface CatApiService {
 //}
 
 
+//se guardan 10 imagenes en la base de datos
+//cuando esten todas guardadas, se coge la primera para enseñar
+//cuando clicas next, te bajas una nueva y la guardas en la base de datos
+//avanzas una imagen
+//cada vez que se le da a next, se guarda en otra tabla el ID de la imagen en la que estas
+//se inicia en la imagen con el ID que hay en la base de datos
+//la imagen a enseñar avanza pero no borra hasta que este 5 por delante
+//a partir de que tenga 5 por delante, se borra la primera y se añade una nueva
+//esto hace que se puedan retroceder 5 imagenes a lo sumo hacia atras.
+//el avance es infinito
+//

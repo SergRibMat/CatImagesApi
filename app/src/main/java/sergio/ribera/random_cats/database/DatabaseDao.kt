@@ -40,5 +40,23 @@ interface CatCacheDatabaseDao {
     fun getSingleCat(id: Long): DatabaseCatObject
 
 
+    @Query("SELECT * from cat_table_cache LIMIT 1")//OK
+    fun getFirstCat(): DatabaseCatObject
+
+
+    @Query("SELECT * from cat_table_cache ORDER BY id DESC LIMIT 1")//OK
+    fun getLastCat(): DatabaseCatObject
+
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)//OK
+    fun insertUtilityClass(databaseUtilityClass: DatabaseUtilityClass)
+
+    //use False in the boolean property, because if you used this method it means the
+    //first cache has been created
+    @Insert(onConflict = OnConflictStrategy.REPLACE)//OK
+    fun insertImagePosition(databaseUtilityClass: DatabaseUtilityClass)
+
+    @Query("SELECT * from utility_table_cache LIMIT 1")//OK
+    fun getUtilityClass(): DatabaseUtilityClass
 
 }

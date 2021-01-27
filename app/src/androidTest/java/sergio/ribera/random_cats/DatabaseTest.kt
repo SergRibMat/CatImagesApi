@@ -27,6 +27,7 @@ import org.junit.runner.RunWith
 import sergio.ribera.random_cats.database.CatCacheDatabase
 import sergio.ribera.random_cats.database.CatCacheDatabaseDao
 import sergio.ribera.random_cats.database.DatabaseCatObject
+import sergio.ribera.random_cats.database.DatabaseUtilityClass
 import java.io.IOException
 
 @RunWith(AndroidJUnit4::class)
@@ -141,5 +142,33 @@ class DatabaseTest {
         )
         val catList = catCacheDatabaseDao.getAllCats()
         Assert.assertEquals(1, catList.size)
+    }
+
+    @Test
+    fun getFirstCat(){
+        insertSeveralCats()
+        val cat = catCacheDatabaseDao.getFirstCat()
+        Assert.assertEquals(1, cat.id)
+    }
+
+    @Test
+    fun getLastCat(){
+        insertSeveralCats()
+        val cat = catCacheDatabaseDao.getLastCat()
+        Assert.assertEquals(3, cat.id)
+    }
+
+    @Test
+    fun insertAndGetUtilityClass(){
+        catCacheDatabaseDao.insertUtilityClass(DatabaseUtilityClass(1, true))
+        val utilityClass = catCacheDatabaseDao.getUtilityClass()
+        Assert.assertEquals(1, utilityClass.imageId)
+    }
+
+    @Test
+    fun updateAndGetImageId(){
+        catCacheDatabaseDao.insertImagePosition(DatabaseUtilityClass(5, false))
+        val utilityClass = catCacheDatabaseDao.getUtilityClass()
+        Assert.assertEquals(5, utilityClass.imageId)
     }
 }

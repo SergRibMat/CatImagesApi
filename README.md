@@ -2,7 +2,7 @@
 * [Summary](#summary)
 * [Technologies](#technologies)
 * [Setup](#setup)
-* [Ilustration](#ilustration)
+* [Illustration](#illustration)
 
 ## Summary
 The objective of this App was to learn how to get JSON objects from an API, get images of cats in this case, and then show them in the creen. 
@@ -29,6 +29,6 @@ To run this project, install it in your devide by downloading it from Play Store
 https://play.google.com/store/apps/details?id=sergio.ribera.random_cats
 
 
-## Ilustration
+## Illustration
 
 ![clickNextButton](https://user-images.githubusercontent.com/54866393/105999398-ec992400-60ad-11eb-9808-599300a8b590.gif)

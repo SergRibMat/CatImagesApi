@@ -3,6 +3,7 @@
 * [Technologies](#technologies)
 * [Setup](#setup)
 * [Illustration](#illustration)
+* [Project status](#project-status)
 
 ## Summary
 The objective of this App was to learn how to get JSON objects from an API, get images of cats in this case, and then show them in the creen. 
@@ -32,3 +33,7 @@ https://play.google.com/store/apps/details?id=sergio.ribera.random_cats
 ## Illustration
 
 ![clickNextButton](https://user-images.githubusercontent.com/54866393/105999398-ec992400-60ad-11eb-9808-599300a8b590.gif)
+
+## Project status 
+
+Still being developed. Adding cache.

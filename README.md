@@ -19,9 +19,9 @@ Project is created with:
 	
 ## Setup
 
-minSdkVersion 23 (Android 6.0)
-targetSdkVersion 30 (Android 11.0)
-compileSdkVersion 30
+* minSdkVersion 23 (Android 6.0)
+* targetSdkVersion 30 (Android 11.0)
+* compileSdkVersion 30
 
 To run this project, install it in your devide by downloading it from Play Store:
 
